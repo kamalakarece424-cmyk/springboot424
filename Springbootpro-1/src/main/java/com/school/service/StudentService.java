@@ -1,18 +1,29 @@
 
 package com.school.service;
+import java.util.List;
+
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.stereotype.Service;
 
 import com.school.entity.Student;
 import com.school.repository.StudentRepository;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@CacheConfig(cacheNames = "student") // optional base cache namespace
 @Service
 public class StudentService {
-  private final StudentRepository repo;
 
-  public StudentService(StudentRepository repo) { this.repo = repo; }
+    private final StudentRepository repo;
 
+    public StudentService(StudentRepository repo) {
+        this.repo = repo;
+    }
+
+    
+       
+
+ 
+
+  
   public Student create(Student s) { return repo.save(s); }
 
   public List<Student> findAll() { return repo.findAll(); }
@@ -35,5 +46,5 @@ public class StudentService {
     Student s = findById(id);
     repo.delete(s);
   }
-}
 
+}
